@@ -36,20 +36,20 @@
 
 #pragma public method
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation setCenter:(CGPoint)center{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:nil setCenter:center];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:nil setCenter:center  cornerAndshadow:(BOOL)isCornerShadow];
 }
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation dismissed:(void (^)(void))dismissed setCenter:(CGPoint)center{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:dismissed setCenter:center];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation dismissed:(void (^)(void))dismissed setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:dismissed setCenter:center  cornerAndshadow:(BOOL)isCornerShadow];
 }
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable setCenter:(CGPoint)center{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:nil setCenter:center];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable setCenter:(CGPoint)center  cornerAndshadow:(BOOL)isCornerShadow{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:nil setCenter:center  cornerAndshadow:(BOOL)isCornerShadow];
 }
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void (^)(void))dismissed setCenter:(CGPoint)center{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:dismissed setCenter:center];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void (^)(void))dismissed setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:dismissed setCenter:center  cornerAndshadow:(BOOL)isCornerShadow];
 }
 
 - (void)lew_dismissPopupViewWithanimation:(id<LewPopupAnimation>)animation{
@@ -93,7 +93,7 @@
 }
 #pragma mark - view handle
 
-- (void)_presentPopupView:(UIView*)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center{
+- (void)_presentPopupView:(UIView*)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow{
 
     
     // check if source view controller is not in destination
@@ -114,13 +114,18 @@
     // customize popupView
     popupView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     popupView.tag = kLEWPopupViewTag;
-    popupView.layer.shadowPath = [UIBezierPath bezierPathWithRect:popupView.bounds].CGPath;
-    popupView.layer.masksToBounds = YES;
-    popupView.layer.shadowOffset = CGSizeMake(0, 0);// 阴影
-    popupView.layer.shadowRadius = 2.5;// 圆角
-    popupView.layer.shadowOpacity = 0.5f;
-    popupView.layer.shouldRasterize = YES;
-    popupView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    
+    // 是否有阴影 圆角
+    if (isCornerShadow) {
+        
+        popupView.layer.shadowPath = [UIBezierPath bezierPathWithRect:popupView.bounds].CGPath;
+        popupView.layer.masksToBounds = YES;
+        popupView.layer.shadowOffset = CGSizeMake(0, 0);// 阴影
+        popupView.layer.shadowRadius = 2.3;// 圆角
+        popupView.layer.shadowOpacity = 0.5f;
+        popupView.layer.shouldRasterize = YES;
+        popupView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    }
     
     // Add overlay
     if (self.lewOverlayView == nil) {

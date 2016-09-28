@@ -21,12 +21,12 @@
 @property (nonatomic, retain, readonly) id<LewPopupAnimation> lewPopupAnimation;
 
 // default click background to disappear
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation setCenter:(CGPoint)center;
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center;
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow;
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow;
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable setCenter:(CGPoint)center;
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow;
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center;
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center cornerAndshadow:(BOOL)isCornerShadow;
 
 - (void)lew_dismissPopupView;
 - (void)lew_dismissPopupViewWithanimation:(id<LewPopupAnimation>)animation;
