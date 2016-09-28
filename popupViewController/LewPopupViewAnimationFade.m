@@ -10,10 +10,16 @@
 
 @implementation LewPopupViewAnimationFade
 
-- (void)showView:(UIView *)popupView overlayView:(UIView *)overlayView{
+- (void)showView:(UIView *)popupView overlayView:(UIView *)overlayView setCenter:(CGPoint)center{
     // Generating Start and Stop Positions
     // Set starting properties
-    popupView.center = overlayView.center;
+    if ( center.x != 0 && center.y != 0 ) {
+        
+        popupView.center = center;
+    }else{
+        
+        popupView.center = overlayView.center;
+    }
     popupView.alpha = 0.0f;
     
     [UIView animateWithDuration:0.5 animations:^{

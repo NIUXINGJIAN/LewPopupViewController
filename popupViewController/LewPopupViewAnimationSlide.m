@@ -9,7 +9,7 @@
 #import "LewPopupViewAnimationSlide.h"
 
 @implementation LewPopupViewAnimationSlide
-- (void)showView:(UIView *)popupView overlayView:(UIView *)overlayView{
+- (void)showView:(UIView *)popupView overlayView:(UIView *)overlayView setCenter:(CGPoint)center{
     
     CGSize sourceSize = overlayView.bounds.size;
     CGSize popupSize = popupView.bounds.size;
@@ -53,6 +53,15 @@
     
     // Set starting properties
     popupView.frame = popupStartRect;
+    
+    if ( center.x != 0 && center.y != 0 ) {
+        
+        popupView.center = center;
+    }else{
+        
+        popupView.center = overlayView.center;
+    }
+
     popupView.alpha = 1.0f;
     [UIView animateWithDuration:0.25 delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         popupView.frame = popupEndRect;

@@ -14,7 +14,7 @@
 
 @implementation LewPopupViewAnimationSpring
 
-- (void)showView:(UIView *)popupView overlayView:(UIView *)overlayView{
+- (void)showView:(UIView *)popupView overlayView:(UIView *)overlayView setCenter:(CGPoint)center{
     popupView.alpha = 1.0f;
     
     CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
@@ -27,6 +27,15 @@
     popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    if ( center.x != 0 && center.y != 0 ) {
+        
+        popupView.center = center;
+    }else{
+        
+        popupView.center = overlayView.center;
+    }
+
     [popupView.layer addAnimation:popAnimation forKey:nil];
 
 }
@@ -47,7 +56,7 @@
     hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                       [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
                                       [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    hideAnimation.delegate = self;
+    hideAnimation.delegate = (id)self;
     [popupView.layer addAnimation:hideAnimation forKey:nil];
 }
 

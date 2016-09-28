@@ -36,20 +36,20 @@
 
 #pragma public method
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:nil];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation setCenter:(CGPoint)center{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:nil setCenter:center];
 }
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation dismissed:(void (^)(void))dismissed{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:dismissed];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation dismissed:(void (^)(void))dismissed setCenter:(CGPoint)center{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:YES dismissed:dismissed setCenter:center];
 }
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:nil];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable setCenter:(CGPoint)center{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:nil setCenter:center];
 }
 
-- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void (^)(void))dismissed{
-    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:dismissed];
+- (void)lew_presentPopupView:(UIView *)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void (^)(void))dismissed setCenter:(CGPoint)center{
+    [self _presentPopupView:popupView animation:animation backgroundClickable:clickable dismissed:dismissed setCenter:center];
 }
 
 - (void)lew_dismissPopupViewWithanimation:(id<LewPopupAnimation>)animation{
@@ -93,7 +93,7 @@
 }
 #pragma mark - view handle
 
-- (void)_presentPopupView:(UIView*)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed{
+- (void)_presentPopupView:(UIView*)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed setCenter:(CGPoint)center{
 
     
     // check if source view controller is not in destination
@@ -115,10 +115,10 @@
     popupView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     popupView.tag = kLEWPopupViewTag;
     popupView.layer.shadowPath = [UIBezierPath bezierPathWithRect:popupView.bounds].CGPath;
-    popupView.layer.masksToBounds = NO;
-    popupView.layer.shadowOffset = CGSizeMake(5, 5);
-    popupView.layer.shadowRadius = 5;
-    popupView.layer.shadowOpacity = 0.5;
+    popupView.layer.masksToBounds = YES;
+    popupView.layer.shadowOffset = CGSizeMake(0, 0);// 阴影
+    popupView.layer.shadowRadius = 2.5;// 圆角
+    popupView.layer.shadowOpacity = 0.5f;
     popupView.layer.shouldRasterize = YES;
     popupView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     
@@ -149,7 +149,7 @@
     self.lewOverlayView.alpha = 1.0f;
     popupView.center = self.lewOverlayView.center;
     if (animation) {
-        [animation showView:popupView overlayView:self.lewOverlayView];
+        [animation showView:popupView overlayView:self.lewOverlayView setCenter:center];
     }
     
     [self setLewDismissCallback:dismissed];
@@ -204,4 +204,4 @@
 - (void)setLewPopupViewController:(UIViewController * _Nullable)lewPopupViewController {
     objc_setAssociatedObject(self, kLEWPopupViewController, lewPopupViewController, OBJC_ASSOCIATION_ASSIGN);
 }
-@end
+@end// 版权属于原作者

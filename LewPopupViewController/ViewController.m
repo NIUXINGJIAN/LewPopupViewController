@@ -33,7 +33,7 @@
     
     [self lew_presentPopupView:view animation:[LewPopupViewAnimationFade new] dismissed:^{
         NSLog(@"动画结束");
-    }];
+    } setCenter:CGPointMake(300, 500)];// CGPointZero 就是原来的位置
 }
 
 - (IBAction)popupViewSlideAction:(id)sender{
@@ -44,7 +44,7 @@
     animation.type = LewPopupViewAnimationSlideTypeBottomBottom;
     [self lew_presentPopupView:view animation:animation dismissed:^{
         NSLog(@"动画结束");
-    }];
+    } setCenter:CGPointMake(300, 500)];
 }
 
 - (IBAction)popupViewSpringAction:(id)sender{
@@ -53,7 +53,7 @@
     
     [self lew_presentPopupView:view animation:[LewPopupViewAnimationSpring new] dismissed:^{
         NSLog(@"动画结束");
-    }];
+    }setCenter:CGPointMake(50, 300)];
 }
 
 - (IBAction)popupViewDropAction:(id)sender{
@@ -62,6 +62,6 @@
     
     [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
         NSLog(@"动画结束");
-    }];
+    }setCenter:CGPointMake(50, 50)];
 }
 @end

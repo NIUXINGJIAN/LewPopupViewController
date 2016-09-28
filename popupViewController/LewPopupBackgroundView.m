@@ -22,7 +22,11 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     size_t locationsCount = 2;
     CGFloat locations[2] = {0.0f, 1.0f};
-    CGFloat colors[8] = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.75f};
+    CGFloat colors[12] = {
+        220.0 / 255.0,  220.0 / 255.0, 220.0 / 255.0, 0.50,
+        220.0 / 255.0,  220.0 / 255.0, 220.0 / 255.0, 0.50,
+        220.0 / 255.0,  220.0 / 255.0, 220.0 / 255.0, 0.50
+    };
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, colors, locations, locationsCount);
     CGColorSpaceRelease(colorSpace);
